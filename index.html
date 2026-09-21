@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ștefan Popescu — Pictură contemporană</title>
+<meta name="description" content="Ștefan Popescu — pictor autodidact. Colecțiile ALBASTRU și CONCREȚIUNE: lucrări figurative în tehnică mixtă, despre fragilitate, tensiune și urmele timpului.">
+<meta property="og:title" content="Ștefan Popescu — Pictură contemporană">
+<meta property="og:description" content="Pictură despre fragilitate, tensiune și felul în care omul încearcă să rămână întreg atunci când viața îl fisurează.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d0f;
+    --bg-soft:#111417;
+    --panel:#14181c;
+    --ink:#e9e6df;
+    --muted:#9aa0a3;
+    --line:rgba(255,255,255,.10);
+    --gold:#c9a24b;
+    --gold-soft:#e6c882;
+    --teal:#3d6f78;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Jost',sans-serif;font-weight:300;
+    line-height:1.7;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:400}
+
+  /* NAV */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;
+    background:linear-gradient(to bottom,rgba(8,9,11,.9),rgba(8,9,11,0));
+    backdrop-filter:blur(6px);transition:background .3s}
+  header.solid{background:rgba(8,9,11,.94);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.18em;text-transform:uppercase}
+  .brand b{color:var(--gold);font-weight:600}
+  .navlinks{display:flex;gap:34px;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase}
+  .navlinks a{color:var(--muted);transition:color .25s}
+  .navlinks a:hover{color:var(--gold-soft)}
+  .burger{display:none;font-size:1.5rem;background:none;border:0;color:var(--ink);cursor:pointer}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;
+    background:#000;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 20%;
+    opacity:.55;transform:scale(1.05);filter:saturate(1.05)}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 90% at 70% 30%,rgba(11,13,15,.15),rgba(11,13,15,.75) 55%,var(--bg) 92%)}
+  .hero-inner{position:relative;z-index:2;padding:120px 0 60px}
+  .hero h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.02;margin:.18em 0 .3em}
+  .hero h1 span{display:block;color:var(--gold-soft);font-style:italic;font-weight:400}
+  .hero p{max-width:44ch;color:#d7d2c8;font-size:1.08rem}
+  .cta{display:inline-flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:14px 30px;font-size:.78rem;letter-spacing:.18em;
+    text-transform:uppercase;border:1px solid var(--gold);color:var(--gold-soft);
+    transition:.3s;border-radius:2px}
+  .btn:hover{background:var(--gold);color:#14100a}
+  .btn.ghost{border-color:var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--ink);background:transparent;color:#fff}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+    z-index:2;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:10px}
+  .scroll-hint i{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);display:block}
+
+  /* SECTION */
+  section{padding:110px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 64px}
+  .sec-head h2{font-size:clamp(2.1rem,5vw,3.2rem);margin:.25em 0 .35em}
+  .sec-head p{color:var(--muted)}
+
+  /* COLLECTIONS */
+  .collection{margin-bottom:90px}
+  .collection:last-child{margin-bottom:0}
+  .coll-head{max-width:720px;margin:0 auto 48px;text-align:center}
+  .coll-head .eyebrow{margin-bottom:10px;display:block}
+  .coll-head h3{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px}
+  .coll-head p{color:var(--muted);font-size:.98rem}
+  .coll-divider{display:flex;align-items:center;gap:18px;max-width:720px;margin:0 auto 56px;color:var(--muted)}
+  .coll-divider i{flex:1;height:1px;background:var(--line)}
+
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+  .work{position:relative;cursor:pointer;background:var(--panel);
+    border:1px solid var(--line);overflow:hidden;border-radius:3px}
+  .work-img{overflow:hidden;background:#0a0c0e}
+  .work-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1);
+    aspect-ratio:3/4}
+  .work:hover .work-img img{transform:scale(1.06)}
+  .work-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 24px 22px;
+    background:linear-gradient(to top,rgba(6,7,9,.92),rgba(6,7,9,.55) 55%,transparent);
+    display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+  .work-cap h3{font-size:1.7rem;line-height:1.1}
+  .work-cap .meta{font-size:.76rem;color:var(--muted);letter-spacing:.06em;margin-top:4px}
+  .work-cap .plus{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    white-space:nowrap;padding-bottom:4px;opacity:.85}
+  .badge{position:absolute;top:16px;left:16px;z-index:3;font-size:.64rem;letter-spacing:.18em;
+    text-transform:uppercase;padding:6px 12px;background:rgba(11,13,15,.7);border:1px solid var(--line);
+    color:var(--gold-soft);border-radius:2px}
+
+  /* ABOUT */
+  .about{display:grid;grid-template-columns:1fr 1.15fr;gap:64px;align-items:center}
+  .about-img{position:relative}
+  .about-img img{border-radius:3px;border:1px solid var(--line)}
+  .about-img .frame{position:absolute;inset:14px;border:1px solid rgba(201,162,75,.35);pointer-events:none}
+  .about h2{font-size:clamp(2rem,4.5vw,3rem);margin:.2em 0 .5em}
+  .about .lead{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;
+    color:var(--gold-soft);margin-bottom:22px;line-height:1.4}
+  .about p{color:#c8c4bb;margin-bottom:16px}
+
+  /* CONTACT */
+  .contact{background:var(--bg-soft);border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .cinfo h3{font-size:1.9rem;margin-bottom:18px}
+  .cinfo .row{display:flex;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}
+  .cinfo .row .k{width:90px;color:var(--gold);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;flex-shrink:0}
+  .cinfo .row .v{color:var(--ink)}
+  .social{display:flex;gap:18px;margin-top:26px}
+  .social a{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.3s;font-size:.9rem}
+  .social a:hover{border-color:var(--gold);color:var(--gold-soft)}
+  form{display:flex;flex-direction:column;gap:14px}
+  input,textarea{background:var(--panel);border:1px solid var(--line);color:var(--ink);
+    padding:14px 16px;font-family:inherit;font-size:.95rem;border-radius:2px;transition:border .25s}
+  input:focus,textarea:focus{outline:none;border-color:var(--gold)}
+  textarea{resize:vertical;min-height:120px}
+
+  footer{padding:46px 0;text-align:center;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}
+  footer .brand{font-size:1.1rem;margin-bottom:10px;color:var(--ink)}
+  footer a{color:var(--gold-soft)}
+
+  /* LIGHTBOX */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(5,6,8,.96);display:none;
+    opacity:0;transition:opacity .35s}
+  .lb.open{display:block;opacity:1;overflow-y:auto}
+  .lb-inner{margin:0 auto;max-width:1150px;width:100%;padding:72px 74px 46px;
+    display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;min-height:100dvh}
+  .lb-main img{width:100%;max-height:80vh;object-fit:contain;border-radius:3px}
+  .lb-info .eyebrow{margin-bottom:14px;display:block}
+  .lb-info h3{font-size:2.6rem;line-height:1.05;margin-bottom:8px}
+  .lb-info .yr{color:var(--gold-soft);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:22px}
+  .lb-info .spec{border-top:1px solid var(--line);padding-top:18px;margin-top:8px}
+  .lb-info .spec div{display:flex;justify-content:space-between;padding:9px 0;font-size:.9rem;border-bottom:1px solid var(--line)}
+  .lb-info .spec .k{color:var(--muted)}
+  .lb-info .desc{color:#c8c4bb;margin:20px 0 24px;font-size:.98rem}
+  .lb-detail{margin-top:20px}
+  .lb-detail .eyebrow{font-size:.64rem;display:block;margin-bottom:10px}
+  .lb-thumbs{display:flex;gap:10px;flex-wrap:wrap}
+  .lb-thumbs img{width:74px;height:74px;object-fit:cover;border-radius:2px;
+    border:1px solid var(--line);cursor:pointer;opacity:.7;transition:.25s}
+  .lb-thumbs img:hover{opacity:1}
+  .lb-thumbs img.active{opacity:1;border-color:var(--gold)}
+  .lb-close{position:fixed;top:22px;right:26px;font-size:1.6rem;background:rgba(11,13,15,.6);border:0;
+    color:var(--ink);cursor:pointer;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);transition:.3s;z-index:5}
+  .lb-close:hover{border-color:var(--gold);color:var(--gold)}
+  .lb-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(11,13,15,.6);border:1px solid var(--line);
+    color:var(--ink);width:52px;height:52px;border-radius:50%;cursor:pointer;font-size:1.2rem;transition:.3s;z-index:5}
+  .lb-prev{left:20px}.lb-next{right:20px}
+  .price-tag{color:var(--gold-soft);font-size:1.15rem}
+
+  @media(max-width:860px){
+    .navlinks{position:fixed;inset:0;top:0;background:rgba(8,9,11,.98);flex-direction:column;
+      justify-content:center;align-items:center;gap:30px;font-size:1rem;transform:translateX(100%);
+      transition:transform .4s;z-index:60}
+    .navlinks.show{transform:translateX(0)}
+    .burger{display:block;z-index:70}
+    .gallery{grid-template-columns:1fr}
+    .about{grid-template-columns:1fr;gap:36px}
+    .contact-grid{grid-template-columns:1fr;gap:36px}
+    .lb-inner{grid-template-columns:1fr;padding:70px 16px 40px;gap:22px;align-items:start}
+    .lb-main img{max-height:60vh}
+    .lb-nav{width:44px;height:44px}.lb-prev{left:10px}.lb-next{right:10px}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap">
+    <nav>
+      <div class="brand">Ștefan Popescu</div>
+      <div class="navlinks" id="navlinks">
+        <a href="#galerie" onclick="closeNav()">Galerie</a>
+        <a href="#despre" onclick="closeNav()">Despre</a>
+        <a href="#contact" onclick="closeNav()">Contact</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Meniu">&#9776;</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-bg" style="background-image:url('img/work7-full.jpg')"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Pictură contemporană &middot; Tehnică mixtă</span>
+    <h1>Ștefan Popescu<span>fragilitate, tensiune și urmele timpului</span></h1>
+    <p>Sunt pictor autodidact. Pictez pentru că am ajuns la lucrurile pe care vreau să le spun.</p>
+    <div class="cta">
+      <a href="#galerie" class="btn">Vezi galeria</a>
+      <a href="#contact" class="btn ghost">Contact</a>
+    </div>
+  </div>
+  <a href="#galerie" class="scroll-hint">Descoperă<i></i></a>
+</div>
+
+<!-- GALLERY -->
+<section id="galerie">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Lucrări</span>
+      <h2>Galeria</h2>
+      <p>Două colecții, două drumuri prin aceeași materie. Apasă pe o lucrare pentru a o vedea în detaliu.</p>
+    </div>
+
+    <div class="collection" id="collection-albastru">
+      <div class="coll-head">
+        <span class="eyebrow">Colecția</span>
+        <h3>ALBASTRU</h3>
+        <p>Corpuri care se scufundă, se cristalizează sau se ridică din propria adâncime — un drum despre fragilitate și despre felul în care alegem să rămânem întregi.</p>
+      </div>
+      <div class="gallery" id="galleryAlbastru"></div>
+    </div>
+
+    <div class="collection" id="collection-concretiune">
+      <div class="coll-divider"><i></i><span class="eyebrow" style="margin:0">Colecție nouă</span><i></i></div>
+      <div class="coll-head">
+        <span class="eyebrow">Colecția</span>
+        <h3>CONCREȚIUNE</h3>
+        <p>Dacă în ALBASTRU corpul se transformă în piatră, aici piatra e ceva care se adună — strat cu strat, în relief real, în jurul unei răni. Lucrări construite în basorelief, cu pastă minerală și praf de marmură.</p>
+      </div>
+      <div class="gallery" id="galleryConcretiune"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="despre">
+  <div class="wrap">
+    <div class="about">
+      <div class="about-img">
+        <img src="img/work8-full.jpg" alt="Lucrare reprezentativă">
+        <span class="frame"></span>
+      </div>
+      <div>
+        <span class="eyebrow">Despre artist</span>
+        <h2>Ștefan Popescu</h2>
+        <p class="lead">„Pictez pentru că am ajuns la lucrurile pe care vreau să le spun.”</p>
+        <p>Am descoperit pictura prea târziu pentru a o lua ușor. Sunt pictor autodidact și inginer de profesie. Am ajuns la pictură din nevoia de a înțelege și de a construi imaginea. M-am format singur, dar nu fără îndrumare: am studiat, am căutat profesori și am experimentat continuu.</p>
+        <p>La 63 de ani, nu mai pictez pentru a demonstra că pot deveni pictor. Pictez pentru că am ajuns la lucrurile pe care vreau să le spun. Unele lucruri nu trebuie începute devreme pentru a deveni esențiale.</p>
+        <p>Pictura mea este despre fragilitate, tensiune, urmele timpului și felul în care omul încearcă să rămână întreg atunci când viața îl fisurează.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Achiziții &amp; comenzi</span>
+      <h2>Contact</h2>
+      <p>Pentru prețul unei lucrări, disponibilitate sau o comandă personalizată, scrie-mi direct.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo">
+        <h3>Hai să vorbim</h3>
+        <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:stefanpopescu10@yahoo.com">stefanpopescu10@yahoo.com</a></span></div>
+        <div class="row"><span class="k">Telefon</span><span class="v"><a href="tel:+40770253879">0770 253 879</a></span></div>
+        <div class="row"><span class="k">Instagram</span><span class="v"><a href="https://instagram.com/stefanpopescu.art" target="_blank" rel="noopener">@stefanpopescu.art</a></span></div>
+        <div class="row"><span class="k">Prețuri</span><span class="v">La cerere &middot; fiecare lucrare este unicat</span></div>
+        <div class="social">
+          <a href="https://instagram.com/stefanpopescu.art" target="_blank" rel="noopener" title="Instagram">ig</a>
+          <a href="mailto:stefanpopescu10@yahoo.com" title="Email">@</a>
+        </div>
+      </div>
+      <form onsubmit="return sendMail(event)">
+        <input type="text" name="nume" placeholder="Numele tău" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="mesaj" placeholder="Mesajul tău — despre ce lucrare ești interesat(ă)?" required></textarea>
+        <button type="submit" class="btn" style="cursor:pointer;background:none">Trimite mesajul</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="letter-spacing:.18em">ȘTEFAN POPESCU</div>
+    <p>&copy; <span id="yr"></span> Ștefan Popescu. Toate lucrările sunt protejate prin drepturi de autor.</p>
+    <p style="margin-top:6px;opacity:.7">Pictură contemporană &middot; Colecțiile ALBASTRU și CONCREȚIUNE</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-close" onclick="closeLb()">&times;</button>
+  <button class="lb-nav lb-prev" onclick="stepLb(-1)">&#8249;</button>
+  <button class="lb-nav lb-next" onclick="stepLb(1)">&#8250;</button>
+  <div class="lb-inner">
+    <div class="lb-main"><img id="lbImg" src="" alt=""></div>
+    <div class="lb-info">
+      <span class="eyebrow" id="lbColl">Lucrare</span>
+      <h3 id="lbTitle"></h3>
+      <div class="yr" id="lbYear"></div>
+      <p class="desc" id="lbDesc"></p>
+      <div class="spec">
+        <div><span class="k">Tehnică</span><span id="lbMedium"></span></div>
+        <div><span class="k">Dimensiuni</span><span id="lbSize"></span></div>
+        <div><span class="k">Disponibilitate</span><span id="lbStatus"></span></div>
+        <div><span class="k">Preț</span><span class="price-tag" id="lbPrice"></span></div>
+      </div>
+      <div class="lb-detail" id="lbDetailWrap">
+        <span class="eyebrow">Vezi în detaliu</span>
+        <div class="lb-thumbs" id="lbThumbs"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ====== COLECȚII ȘI LUCRĂRI (editabile) ====== */
+const works = [
+  { collection:"ALBASTRU",
+    full:"img/work1-full.jpg", thumb:"img/work1-full-thumb.jpg",
+    details:["work1-detail","tex-silver"],
+    title:"ALBASTRU I — Începutul", subtitle:"„Between Words”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și pastă structurală pe MDF", size:"100 × 70 cm", price:"La cerere",
+    desc:"Am început această serie într-o seară în care nu puteam să pictez nimic frumos. Atunci mi-am spus: nu mai pictez frumos, pictez adevărat. Lucrarea nu a pornit de la o schiță, ci de la un gest — un trup adunat în sine, cu brațele strânse în jurul lui, așa cum stai atunci când vrei să te aperi de propriile gânduri. Am construit fundalul din pastă de structurare aplicată cu șpaclul, în straturi groase, haotice, apoi am lucrat cu glasiuri subțiri de acrilic: albastru de Prusia, turcoaz, indigo și umbră naturală. Am vrut ca trupul să aibă ceva mineral, aproape de piatră; doar mâinile și tălpile ard, în sienna arsă și roșu englez — acolo unde viața rămâne. Pentru mine, albastrul acesta nu este nici cer, nici mare. Este o stare." },
+  { collection:"ALBASTRU",
+    full:"img/work2-full.jpg", thumb:"img/work2-full-thumb.jpg",
+    details:["work2-detail","tex-gold-2"],
+    title:"ALBASTRU II — Limita", subtitle:"„The Distance Between Us”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic, pastă structurală și pigment auriu pe MDF", size:"100 × 70 cm", price:"La cerere",
+    desc:"Am vrut să pictez momentul în care spui „stop”. Nu cu furie, ci cu claritate. Femeia nu mai privește în lateral și nu mai evită — se uită direct în tine; ochii sunt ancora tabloului. Iar mâinile sunt totul aici: enorme, aduse în prim-plan, cu palmele spre privitor. Este gestul universal de barieră — nu te apropia mai mult — dar, în același timp, este un gest de expunere totală: îți arăt exact ceea ce încerc să opresc. Restul corpului rămâne în griuri de acrilic, aproape de piatră, iar contrastul e voit, între corpul care îngheață și mâinile care ard. Este vulnerabilitatea care devine putere." },
+  { collection:"ALBASTRU",
+    full:"img/work4-full.jpg", thumb:"img/work4-full-thumb.jpg",
+    details:["work4-detail","tex-green"],
+    title:"ALBASTRU III — Absența", subtitle:"„The Imprint of Absence”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic, pastă structurală și pigment auriu pe MDF", size:"100 × 70 cm", price:"La cerere",
+    desc:"Un scaun vechi, o haină aruncată peste el, o pereche de pantofi dedesubt — obiecte banale, pe care le-am pictat ca și cum ar fi relicve. Figura se retrage în fundal, aproape invizibilă, o prezență care se stinge în perete. Singurul lucru care rămâne viu, ancorat în realitate, este din nou mâna, cu venele și încheieturile ei, sprijinită pe spătarul scaunului. Aici am inversat procesul obișnuit: am îngropat figura într-un fundal gros de aproape un centimetru, am întins acrilic diluat și l-am șters imediat cu o cârpă — un fel de frottage invers, în care imaginea rămâne doar în adânciturile pastei. Nu este o pictură despre tristețe, ci despre eliberarea care vine după ce ai avut curajul să faci liniște." },
+  { collection:"ALBASTRU",
+    full:"img/work3-full.jpg", thumb:"img/work3-full-thumb.jpg",
+    details:["work3-detail","tex-gold-1","tex-foot"],
+    title:"ALBASTRU IV — Coloana", subtitle:"„Fault Line”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic, pastă structurală și pigment auriu în relief pe MDF", size:"70 × 100 cm", price:"La cerere",
+    desc:"Un bărbat văzut din spate, desculț, în pantaloni albi, cu spatele descoperit. De-a lungul șirei spinării urcă o creastă de aur, în relief. Nu este o fisură și nu este o rană care se deschide spre interior — este opusul. El nu se mai ține cu mâinile: se ține cu coloana pe care și-a construit-o singur. Am modelat aurul cu șpaclul, în pastă groasă și densă, construind peste suprafață, nu săpând în ea, ca să nască umbră și adâncime. Nu te mai repari ca să fii la fel ca înainte. Te repari ca să fii mai înalt, mai vizibil, mai solid." },
+  { collection:"ALBASTRU",
+    full:"img/work5-full.jpg", thumb:"img/work5-full-thumb.jpg",
+    details:["work5-detail1","work5-detail2"],
+    title:"Firul", subtitle:"„Seria Petrificare”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic impasto pe MDF", size:"70 × 100 cm", price:"La cerere",
+    desc:"Un bărbat stă așezat, cu picioarele strânse sub el, iar corpul i s-a făcut piatră — alb-cenușiu, mat, mineralizat până la umeri. Doar mâinile mai sunt vii: roz, calde, singurele care mai au sânge în ele. Încheieturile îi sunt legate cu un fir de aur, iar același fir urcă, subțire, până în palma ridicată spre lumina care intră din dreapta sus. Privind, nu știi dacă mâna oferă firul sau dacă firul o trage în sus — dacă e ofrandă sau captivitate. Asta e tot ce am vrut să pictez. Aurul aici nu e podoabă și nu vindecă nimic frumos, așa cum se folosește de obicei kintsugi; e ceea ce leagă și ceea ce trage, agentul, nu decorul. Am ținut restul corpului în cenușiu tocmai ca firul să nu aibă unde să se ascundă: într-un tablou plin de culoare ar fi fost un accent, aici e singura decizie. Face parte dintr-o serie despre petrificare — figuri prinse între viu și mineral, surprinse nu ca statui terminate, ci în clipa de dinainte, când o parte din ele încă refuză. Aici, partea care refuză sunt mâinile: cât timp firul e cald, transformarea nu e completă." },
+  { collection:"ALBASTRU",
+    full:"img/work6-full.jpg", thumb:"img/work6-full-thumb.jpg",
+    details:["work6-detail1","work6-detail2"],
+    title:"Apnee", subtitle:"„Ultimul strop de energie”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și impasto pe MDF", size:"100 × 70 cm", price:"La cerere",
+    desc:"O figură plutește într-un vortex de albastru închis, cu glezna încă legată de adânc printr-un lanț ruginit. Tot restul corpului i se arcuiește în sus, spre lumină, iar o dâră subțire de bule urcă înaintea ei — ultimul suflu transformat în rugăciune. Nu am vrut să pictez o luptă. Am vrut acel moment în care te simți ancorat, fără aer, și alegi să-ți folosești ultimul strop de energie nu ca să te zbați cu apa, ci ca să arăți încotro vrei să mergi. Am lucrat totul în cuțit, cu impasto puternic, ca apa să capete greutate fizică — straturile groase, aproape sculpturale, o fac să se simtă densă, grea, în timp ce lumina centrală sparge textura. E o pictură pe care trebuie s-o vezi de aproape ca să-i simți adâncimea." },
+
+  { collection:"ALBASTRU",
+    full:"img/work7-full.jpg", thumb:"img/work7-full-thumb.jpg",
+    details:["work7-detail2","work7-detail1"],
+    title:"Emergența", subtitle:"„Ce se ridică din adânc”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și impasto pe MDF", size:"— × — cm", price:"La cerere",
+    desc:"De data asta nu m-a interesat scufundarea, ci ce vine după ea. Capul e dat pe spate, în lumina care cade dintr-o parte, iar de la piept până la talpă coboară o singură venă de aur — subțire, continuă, ca o fisură care nu se mai ascunde, ci arată drumul spre exterior a tot ce a stat îngropat înăuntru. Corpul e cenușiu, aproape mineral, dar linia de aur îl străbate întreg, dintr-o singură mișcare, fără să se rupă. Am construit fundalul în straturi adânci de albastru și verde întunecat, ca o apă sau o piatră din care figura se desprinde, nu spre care se scufundă. Emergența nu e despre a scăpa de sub ceva, ci despre momentul în care rana devine drum — singurul loc pe unde poți ieși e exact pe unde ai fost rupt." },
+
+  { collection:"ALBASTRU",
+    full:"img/work8-full.jpg", thumb:"img/work8-full-thumb.jpg",
+    details:["work8-detail1","work8-detail2","work8-detail3"],
+    title:"Pragul", subtitle:"„Nici piatră, nici carne”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și impasto pe MDF", size:"— × — cm", price:"La cerere",
+    desc:"Aici am împărțit corpul exact pe mijloc: o jumătate s-a făcut piatră, crăpată, aproape sticloasă; cealaltă a rămas carne caldă. Nu sunt două trupuri, ci unul singur, prins în pragul dintre ele. Mâinile — una de piatră, una vie — se odihnesc fiecare pe umărul care-i seamănă, ca și cum s-ar ține pe sine din ambele părți deodată, fără să știe pe care s-o creadă mai adevărată. Exact acolo unde se întâlnesc cele două jumătăți, pe șira spinării, am tras un fir subțire de aur, singurul lucru care le ține împreună fără să le amestece. Pragul nu e despre a alege între a rămâne piatră sau a rămâne carne. E despre tot ce se întâmplă cât timp nu alegi niciuna." },
+];
+
+const works2 = [
+  { collection:"CONCREȚIUNE",
+    full:"img/work9-full.jpg", thumb:"img/work9-full-thumb.jpg",
+    details:["work9-detail1","work9-detail2","work9-detail3"],
+    title:"Sutura", subtitle:"„Prima lucrare din Concrețiune”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic pe MDF, cu intervenție de basorelief din pastă minerală cu praf de marmură", size:"70 × 100 cm", price:"La cerere",
+    desc:"De data asta n-am mai pictat piatra — am construit-o. Am ridicat pasta minerală cu praf de marmură direct pe suprafață, în relief real, până când umărul și pieptul au căpătat greutatea adevărată a materiei, nu doar aparența ei. Capul e plecat, o mână se așază pe piept, iar dedesubt, acolo unde ar trebui să fie inima, coboară o sutură de aur prin toată grosimea reliefului. Nu e o venă care traversează carnea, ci o cusătură care ține laolaltă ceva ce s-a format din mai multe bucăți. Sutura deschide o serie nouă — Concrețiune — în care nu mai urmăresc corpul care se preface în piatră, ci piatra care s-a strâns, strat cu strat, exact în jurul unei răni, până a devenit ea însăși o formă de vindecare." },
+];
+works.push(...works2);
+
+/* build galleries grouped by collection */
+const gridAlbastru = document.getElementById('galleryAlbastru');
+const gridConcretiune = document.getElementById('galleryConcretiune');
+works.forEach((w,i)=>{
+  const el=document.createElement('div');
+  el.className='work';
+  el.onclick=()=>openLb(i);
+  el.innerHTML=`
+    <span class="badge">${w.status}</span>
+    <div class="work-img"><img src="${w.thumb}" alt="${w.title}" loading="lazy"></div>
+    <div class="work-cap">
+      <div><h3>${w.title}</h3><div class="meta">${w.medium}</div></div>
+      <span class="plus">Detaliu +</span>
+    </div>`;
+  (w.collection==="CONCREȚIUNE" ? gridConcretiune : gridAlbastru).appendChild(el);
+});
+
+/* lightbox */
+let cur=0;
+function openLb(i){
+  cur=i; const w=works[i];
+  document.getElementById('lbColl').textContent="Colecția "+w.collection;
+  document.getElementById('lbTitle').textContent=w.title;
+  document.getElementById('lbYear').textContent=[w.subtitle,w.year].filter(Boolean).join(" · ");
+  document.getElementById('lbDesc').textContent=w.desc;
+  document.getElementById('lbMedium').textContent=w.medium;
+  document.getElementById('lbSize').textContent=w.size;
+  document.getElementById('lbStatus').textContent=w.status;
+  document.getElementById('lbPrice').textContent=w.price;
+  const views=[{src:w.full,thumb:w.thumb,label:"Lucrarea completă"}]
+    .concat((w.details||[]).map(d=>({src:`img/${d}.jpg`,thumb:`img/${d}-thumb.jpg`,label:"Detaliu"})));
+  const strip=document.getElementById('lbThumbs'); strip.innerHTML="";
+  views.forEach((v,idx)=>{
+    const im=document.createElement('img');
+    im.src=v.thumb; im.alt=v.label; im.title=v.label; im.loading="lazy";
+    im.onclick=()=>{lbShow(v.src);[...strip.children].forEach(c=>c.classList.remove('active'));im.classList.add('active');};
+    if(idx===0)im.classList.add('active');
+    strip.appendChild(im);
+  });
+  lbShow(w.full);
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function lbShow(src){document.getElementById('lbImg').src=src;}
+function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
+function stepLb(d){openLb((cur+d+works.length)%works.length);}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')closeLb();});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('open'))return;
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowRight')stepLb(1);
+  if(e.key==='ArrowLeft')stepLb(-1);
+});
+
+/* nav */
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>60));
+document.getElementById('burger').onclick=()=>document.getElementById('navlinks').classList.toggle('show');
+function closeNav(){document.getElementById('navlinks').classList.remove('show');}
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* form -> mailto */
+function sendMail(e){
+  e.preventDefault();
+  const f=e.target;
+  const to="stefanpopescu10@yahoo.com";
+  const sub=encodeURIComponent("Mesaj de pe site — "+f.nume.value);
+  const body=encodeURIComponent(f.mesaj.value+"\n\n— "+f.nume.value+" ("+f.email.value+")");
+  window.location.href=`mailto:${to}?subject=${sub}&body=${body}`;
+  return false;
+}
+</script>
+</body>
+</html>
