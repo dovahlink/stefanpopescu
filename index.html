@@ -18,6 +18,11 @@
 <meta name="twitter:title" content="Ștefan Popescu — Pictură contemporană">
 <meta name="twitter:description" content="Pictură despre fragilitate, tensiune și felul în care omul încearcă să rămână întreg atunci când viața îl fisurează.">
 <meta name="twitter:image" content="https://stefan-popescu.com/img/og-image.jpg">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="img/favicon-512.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -48,17 +53,25 @@
   .eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:400}
 
   /* NAV */
-  header{position:fixed;top:0;left:0;right:0;z-index:50;
+  header{position:fixed;top:0;left:0;right:0;z-index:50;transition:border-color .3s}
+  header::before{content:"";position:absolute;inset:0;z-index:-1;
     background:linear-gradient(to bottom,rgba(8,9,11,.9),rgba(8,9,11,0));
     backdrop-filter:blur(6px);transition:background .3s}
-  header.solid{background:rgba(8,9,11,.94);border-bottom:1px solid var(--line)}
+  header.solid::before{background:rgba(8,9,11,.94)}
+  header.solid{border-bottom:1px solid var(--line)}
   nav{display:flex;align-items:center;justify-content:space-between;height:74px}
   .brand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.18em;text-transform:uppercase}
   .brand b{color:var(--gold);font-weight:600}
+  .nav-right{display:flex;align-items:center;gap:28px}
   .navlinks{display:flex;gap:34px;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase}
   .navlinks a{color:var(--muted);transition:color .25s}
   .navlinks a:hover{color:var(--gold-soft)}
   .burger{display:none;font-size:1.5rem;background:none;border:0;color:var(--ink);cursor:pointer}
+  .lang-switch{display:flex;gap:2px;border:1px solid var(--line);border-radius:20px;padding:3px;position:relative;z-index:70}
+  .lang-btn{background:none;border:0;color:var(--muted);font-size:.72rem;letter-spacing:.1em;
+    padding:5px 13px;border-radius:16px;cursor:pointer;transition:.25s;font-family:'Jost',sans-serif}
+  .lang-btn.active{background:var(--gold);color:#14100a}
+  .lang-btn:hover:not(.active){color:var(--gold-soft)}
 
   /* HERO */
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;
@@ -199,12 +212,18 @@
   <div class="wrap">
     <nav>
       <div class="brand">Ștefan Popescu</div>
-      <div class="navlinks" id="navlinks">
-        <a href="#galerie" onclick="closeNav()">Galerie</a>
-        <a href="#despre" onclick="closeNav()">Despre</a>
-        <a href="#contact" onclick="closeNav()">Contact</a>
+      <div class="nav-right">
+        <div class="navlinks" id="navlinks">
+          <a href="#galerie" data-en="Gallery" onclick="closeNav()">Galerie</a>
+          <a href="#despre" data-en="About" onclick="closeNav()">Despre</a>
+          <a href="#contact" data-en="Contact" onclick="closeNav()">Contact</a>
+        </div>
+        <div class="lang-switch" id="langSwitch">
+          <button type="button" class="lang-btn active" data-lang="ro">RO</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="burger" id="burger" aria-label="Meniu" data-en-aria-label="Menu">&#9776;</button>
       </div>
-      <button class="burger" id="burger" aria-label="Meniu">&#9776;</button>
     </nav>
   </div>
 </header>
@@ -213,41 +232,41 @@
 <div class="hero" id="top">
   <div class="hero-bg" style="background-image:url('img/work7-full.jpg')"></div>
   <div class="wrap hero-inner">
-    <span class="eyebrow">Pictură contemporană &middot; Tehnică mixtă</span>
-    <h1>Ștefan Popescu<span>fragilitate, tensiune și urmele timpului</span></h1>
-    <p>Sunt pictor autodidact. Pictez pentru că am ajuns la lucrurile pe care vreau să le spun.</p>
+    <span class="eyebrow" data-en="Contemporary Painting &middot; Mixed Media">Pictură contemporană &middot; Tehnică mixtă</span>
+    <h1>Ștefan Popescu<span data-en="fragility, tension, and the marks of time">fragilitate, tensiune și urmele timpului</span></h1>
+    <p data-en="I am a self-taught painter. I paint because I have finally reached the things I want to say.">Sunt pictor autodidact. Pictez pentru că am ajuns la lucrurile pe care vreau să le spun.</p>
     <div class="cta">
-      <a href="#galerie" class="btn">Vezi galeria</a>
-      <a href="#contact" class="btn ghost">Contact</a>
+      <a href="#galerie" class="btn" data-en="View gallery">Vezi galeria</a>
+      <a href="#contact" class="btn ghost" data-en="Contact">Contact</a>
     </div>
   </div>
-  <a href="#galerie" class="scroll-hint">Descoperă<i></i></a>
+  <a href="#galerie" class="scroll-hint" data-en="Discover">Descoperă<i></i></a>
 </div>
 
 <!-- GALLERY -->
 <section id="galerie">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Lucrări</span>
-      <h2>Galeria</h2>
-      <p>Două colecții, două drumuri prin aceeași materie. Apasă pe o lucrare pentru a o vedea în detaliu.</p>
+      <span class="eyebrow" data-en="Works">Lucrări</span>
+      <h2 data-en="Gallery">Galeria</h2>
+      <p data-en="Two collections, two paths through the same matter. Click on a piece to see it in detail.">Două colecții, două drumuri prin aceeași materie. Apasă pe o lucrare pentru a o vedea în detaliu.</p>
     </div>
 
     <div class="collection" id="collection-albastru">
       <div class="coll-head">
-        <span class="eyebrow">Colecția</span>
+        <span class="eyebrow" data-en="Collection">Colecția</span>
         <h3>ALBASTRU</h3>
-        <p>Corpuri care se scufundă, se cristalizează sau se ridică din propria adâncime — un drum despre fragilitate și despre felul în care alegem să rămânem întregi.</p>
+        <p data-en="Bodies that sink, crystallize, or rise from their own depths — a journey about fragility and the way we choose to stay whole.">Corpuri care se scufundă, se cristalizează sau se ridică din propria adâncime — un drum despre fragilitate și despre felul în care alegem să rămânem întregi.</p>
       </div>
       <div class="gallery" id="galleryAlbastru"></div>
     </div>
 
     <div class="collection" id="collection-concretiune">
-      <div class="coll-divider"><i></i><span class="eyebrow" style="margin:0">Colecție nouă</span><i></i></div>
+      <div class="coll-divider"><i></i><span class="eyebrow" style="margin:0" data-en="New collection">Colecție nouă</span><i></i></div>
       <div class="coll-head">
-        <span class="eyebrow">Colecția</span>
+        <span class="eyebrow" data-en="Collection">Colecția</span>
         <h3>CONCREȚIUNE</h3>
-        <p>Dacă în ALBASTRU corpul se transforma în piatră, aici piatra devine materie reală — se adună, strat cu strat, sau se desprinde și cade, direct pe suprafață, în relief. Lucrări construite în basorelief, cu pastă minerală și praf de marmură.</p>
+        <p data-en="If in ALBASTRU the body turned into stone, here stone becomes real matter — it gathers, layer by layer, or breaks away and falls, straight onto the surface, in relief. Works built in bas-relief, with mineral paste and marble dust.">Dacă în ALBASTRU corpul se transforma în piatră, aici piatra devine materie reală — se adună, strat cu strat, sau se desprinde și cade, direct pe suprafață, în relief. Lucrări construite în basorelief, cu pastă minerală și praf de marmură.</p>
       </div>
       <div class="gallery" id="galleryConcretiune"></div>
     </div>
@@ -259,16 +278,16 @@
   <div class="wrap">
     <div class="about">
       <div class="about-img">
-        <img src="img/work8-full.jpg" alt="Lucrare reprezentativă">
+        <img src="img/work8-full.jpg" alt="Lucrare reprezentativă" data-en-alt="Representative work">
         <span class="frame"></span>
       </div>
       <div>
-        <span class="eyebrow">Despre artist</span>
+        <span class="eyebrow" data-en="About the artist">Despre artist</span>
         <h2>Ștefan Popescu</h2>
-        <p class="lead">„Pictez pentru că am ajuns la lucrurile pe care vreau să le spun.”</p>
-        <p>Am descoperit pictura prea târziu pentru a o lua ușor. Sunt pictor autodidact și inginer de profesie. Am ajuns la pictură din nevoia de a înțelege și de a construi imaginea. M-am format singur, dar nu fără îndrumare: am studiat, am căutat profesori și am experimentat continuu.</p>
-        <p>La 63 de ani, nu mai pictez pentru a demonstra că pot deveni pictor. Pictez pentru că am ajuns la lucrurile pe care vreau să le spun. Unele lucruri nu trebuie începute devreme pentru a deveni esențiale.</p>
-        <p>Pictura mea este despre fragilitate, tensiune, urmele timpului și felul în care omul încearcă să rămână întreg atunci când viața îl fisurează.</p>
+        <p class="lead" data-en="&ldquo;I paint because I have finally reached the things I want to say.&rdquo;">„Pictez pentru că am ajuns la lucrurile pe care vreau să le spun.”</p>
+        <p data-en="I discovered painting too late to take it lightly. I am a self-taught painter and an engineer by profession. I came to painting out of a need to understand and to construct the image. I trained myself, though not without guidance: I studied, sought out teachers, and experimented continuously.">Am descoperit pictura prea târziu pentru a o lua ușor. Sunt pictor autodidact și inginer de profesie. Am ajuns la pictură din nevoia de a înțelege și de a construi imaginea. M-am format singur, dar nu fără îndrumare: am studiat, am căutat profesori și am experimentat continuu.</p>
+        <p data-en="At 63, I no longer paint to prove that I can become a painter. I paint because I have finally reached the things I want to say. Some things don't need to be started early to become essential.">La 63 de ani, nu mai pictez pentru a demonstra că pot deveni pictor. Pictez pentru că am ajuns la lucrurile pe care vreau să le spun. Unele lucruri nu trebuie începute devreme pentru a deveni esențiale.</p>
+        <p data-en="My painting is about fragility, tension, the marks of time, and the way a person tries to stay whole when life cracks them open.">Pictura mea este despre fragilitate, tensiune, urmele timpului și felul în care omul încearcă să rămână întreg atunci când viața îl fisurează.</p>
       </div>
     </div>
   </div>
@@ -278,27 +297,27 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Achiziții &amp; comenzi</span>
-      <h2>Contact</h2>
-      <p>Pentru prețul unei lucrări, disponibilitate sau o comandă personalizată, scrie-mi direct.</p>
+      <span class="eyebrow" data-en="Purchases &amp; commissions">Achiziții &amp; comenzi</span>
+      <h2 data-en="Contact">Contact</h2>
+      <p data-en="For the price of a piece, availability, or a custom commission, write to me directly.">Pentru prețul unei lucrări, disponibilitate sau o comandă personalizată, scrie-mi direct.</p>
     </div>
     <div class="contact-grid">
       <div class="cinfo">
-        <h3>Hai să vorbim</h3>
+        <h3 data-en="Let's talk">Hai să vorbim</h3>
         <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:stefanpopescu10@yahoo.com">stefanpopescu10@yahoo.com</a></span></div>
-        <div class="row"><span class="k">Telefon</span><span class="v"><a href="tel:+40770253879">0770 253 879</a></span></div>
+        <div class="row"><span class="k" data-en="Phone">Telefon</span><span class="v"><a href="tel:+40770253879">0770 253 879</a></span></div>
         <div class="row"><span class="k">Instagram</span><span class="v"><a href="https://instagram.com/stefanpopescu.art" target="_blank" rel="noopener">@stefanpopescu.art</a></span></div>
-        <div class="row"><span class="k">Prețuri</span><span class="v">La cerere &middot; fiecare lucrare este unicat</span></div>
+        <div class="row"><span class="k" data-en="Prices">Prețuri</span><span class="v" data-en="On request &middot; each piece is one of a kind">La cerere &middot; fiecare lucrare este unicat</span></div>
         <div class="social">
           <a href="https://instagram.com/stefanpopescu.art" target="_blank" rel="noopener" title="Instagram">ig</a>
           <a href="mailto:stefanpopescu10@yahoo.com" title="Email">@</a>
         </div>
       </div>
       <form onsubmit="return sendMail(event)">
-        <input type="text" name="nume" placeholder="Numele tău" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="mesaj" placeholder="Mesajul tău — despre ce lucrare ești interesat(ă)?" required></textarea>
-        <button type="submit" class="btn" style="cursor:pointer;background:none">Trimite mesajul</button>
+        <input type="text" name="nume" placeholder="Numele tău" data-en-placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Email" data-en-placeholder="Email" required>
+        <textarea name="mesaj" placeholder="Mesajul tău — despre ce lucrare ești interesat(ă)?" data-en-placeholder="Your message — which piece are you interested in?" required></textarea>
+        <button type="submit" class="btn" style="cursor:pointer;background:none" data-en="Send message">Trimite mesajul</button>
       </form>
     </div>
   </div>
@@ -307,8 +326,8 @@
 <footer>
   <div class="wrap">
     <div class="brand" style="letter-spacing:.18em">ȘTEFAN POPESCU</div>
-    <p>&copy; <span id="yr"></span> Ștefan Popescu. Toate lucrările sunt protejate prin drepturi de autor.</p>
-    <p style="margin-top:6px;opacity:.7">Pictură contemporană &middot; Colecțiile ALBASTRU și CONCREȚIUNE</p>
+    <p>&copy; <span id="yr"></span> Ștefan Popescu. <span data-en="All works are protected by copyright.">Toate lucrările sunt protejate prin drepturi de autor.</span></p>
+    <p style="margin-top:6px;opacity:.7" data-en="Contemporary painting &middot; The ALBASTRU and CONCREȚIUNE collections">Pictură contemporană &middot; Colecțiile ALBASTRU și CONCREȚIUNE</p>
   </div>
 </footer>
 
@@ -325,13 +344,13 @@
       <div class="yr" id="lbYear"></div>
       <p class="desc" id="lbDesc"></p>
       <div class="spec">
-        <div><span class="k">Tehnică</span><span id="lbMedium"></span></div>
-        <div><span class="k">Dimensiuni</span><span id="lbSize"></span></div>
-        <div><span class="k">Disponibilitate</span><span id="lbStatus"></span></div>
-        <div><span class="k">Preț</span><span class="price-tag" id="lbPrice"></span></div>
+        <div><span class="k" data-en="Medium">Tehnică</span><span id="lbMedium"></span></div>
+        <div><span class="k" data-en="Dimensions">Dimensiuni</span><span id="lbSize"></span></div>
+        <div><span class="k" data-en="Availability">Disponibilitate</span><span id="lbStatus"></span></div>
+        <div><span class="k" data-en="Price">Preț</span><span class="price-tag" id="lbPrice"></span></div>
       </div>
       <div class="lb-detail" id="lbDetailWrap">
-        <span class="eyebrow">Vezi în detaliu</span>
+        <span class="eyebrow" data-en="View in detail">Vezi în detaliu</span>
         <div class="lb-thumbs" id="lbThumbs"></div>
       </div>
     </div>
@@ -344,103 +363,185 @@ const works = [
   { collection:"ALBASTRU",
     full:"img/work1-full.jpg", thumb:"img/work1-full-thumb.jpg",
     details:["work1-detail","tex-silver"],
-    title:"ALBASTRU I — Începutul", subtitle:"„Between Words”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic și pastă structurală pe MDF", size:"100 × 70 cm", price:"La cerere",
-    desc:"Am început această serie într-o seară în care nu puteam să pictez nimic frumos. Atunci mi-am spus: nu mai pictez frumos, pictez adevărat. Lucrarea a pornit de la un gest — un trup adunat în sine, cu brațele strânse în jurul lui, așa cum stai atunci când vrei să te aperi de propriile gânduri. Am construit fundalul din pastă de structurare aplicată cu șpaclul, în straturi groase, haotice, apoi am lucrat cu glasiuri subțiri de acrilic: albastru de Prusia, turcoaz, indigo și umbră naturală. Am vrut ca trupul să aibă ceva mineral, aproape de piatră; doar mâinile și tălpile ard, în sienna arsă și roșu englez — acolo unde viața rămâne. Pentru mine, albastrul acesta nu este nici cer, nici mare. Este o stare." },
+    title:"ALBASTRU I — Începutul", title_en:"ALBASTRU I — The Beginning",
+    subtitle:"„Between Words”", subtitle_en:"“Between Words”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și pastă structurală pe MDF", medium_en:"Acrylic and structural paste on MDF",
+    size:"100 × 70 cm", price:"La cerere",
+    desc:"Am început această serie într-o seară în care nu puteam să pictez nimic frumos. Atunci mi-am spus: nu mai pictez frumos, pictez adevărat. Lucrarea a pornit de la un gest — un trup adunat în sine, cu brațele strânse în jurul lui, așa cum stai atunci când vrei să te aperi de propriile gânduri. Am construit fundalul din pastă de structurare aplicată cu șpaclul, în straturi groase, haotice, apoi am lucrat cu glasiuri subțiri de acrilic: albastru de Prusia, turcoaz, indigo și umbră naturală. Am vrut ca trupul să aibă ceva mineral, aproape de piatră; doar mâinile și tălpile ard, în sienna arsă și roșu englez — acolo unde viața rămâne. Pentru mine, albastrul acesta nu este nici cer, nici mare. Este o stare.",
+    desc_en:"I started this series on an evening when I couldn't paint anything beautiful. That's when I told myself: stop painting beautiful, paint true. The piece began with a gesture — a body drawn into itself, arms wrapped tightly around it, the way you sit when you want to shield yourself from your own thoughts. I built the background from structural paste applied with a palette knife, in thick, chaotic layers, then worked over it with thin acrylic glazes: Prussian blue, turquoise, indigo, and raw umber. I wanted the body to feel mineral, almost stone; only the hands and feet burn, in burnt sienna and English red — where life still remains. For me, this blue is neither sky nor sea. It's a state of being." },
   { collection:"ALBASTRU",
     full:"img/work2-full.jpg", thumb:"img/work2-full-thumb.jpg",
     details:["work2-detail","tex-gold-2"],
-    title:"ALBASTRU II — Limita", subtitle:"„The Distance Between Us”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic, pastă structurală și pigment auriu pe MDF", size:"100 × 70 cm", price:"La cerere",
-    desc:"Am vrut să pictez momentul în care spui „stop”. Femeia nu mai privește în lateral și nu mai evită — se uită direct în tine; ochii sunt ancora tabloului. Iar mâinile sunt totul aici: enorme, aduse în prim-plan, cu palmele spre privitor. Este gestul universal de barieră — nu te apropia mai mult — dar, în același timp, este un gest de expunere totală: îți arăt exact ceea ce încerc să opresc. Restul corpului rămâne în griuri de acrilic, aproape de piatră, iar contrastul e voit, între corpul care îngheață și mâinile care ard. Este vulnerabilitatea care devine putere." },
+    title:"ALBASTRU II — Limita", title_en:"ALBASTRU II — The Limit",
+    subtitle:"„The Distance Between Us”", subtitle_en:"“The Distance Between Us”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic, pastă structurală și pigment auriu pe MDF", medium_en:"Acrylic, structural paste, and gold pigment on MDF",
+    size:"100 × 70 cm", price:"La cerere",
+    desc:"Am vrut să pictez momentul în care spui „stop”. Femeia nu mai privește în lateral și nu mai evită — se uită direct în tine; ochii sunt ancora tabloului. Iar mâinile sunt totul aici: enorme, aduse în prim-plan, cu palmele spre privitor. Este gestul universal de barieră — nu te apropia mai mult — dar, în același timp, este un gest de expunere totală: îți arăt exact ceea ce încerc să opresc. Restul corpului rămâne în griuri de acrilic, aproape de piatră, iar contrastul e voit, între corpul care îngheață și mâinile care ard. Este vulnerabilitatea care devine putere.",
+    desc_en:"I wanted to paint the moment you say “stop.” The woman no longer looks away or avoids you — she looks straight at you; the eyes are the anchor of the painting. And the hands are everything here: enormous, brought to the foreground, palms turned toward the viewer. It's the universal gesture of a barrier — come no closer — but at the same time, it's a gesture of total exposure: I'm showing you exactly what I'm trying to stop. The rest of the body stays in acrylic greys, close to stone, and the contrast is deliberate, between the body that freezes and the hands that burn. It's vulnerability turning into power." },
   { collection:"ALBASTRU",
     full:"img/work4-full.jpg", thumb:"img/work4-full-thumb.jpg",
     details:["work4-detail","tex-green"],
-    title:"ALBASTRU III — Absența", subtitle:"„The Imprint of Absence”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic, pastă structurală și pigment auriu pe MDF", size:"100 × 70 cm", price:"La cerere",
-    desc:"Un scaun vechi, o haină aruncată peste el, o pereche de pantofi dedesubt — obiecte banale, pe care le-am pictat ca și cum ar fi relicve. Figura se retrage în fundal, aproape invizibilă, o prezență care se stinge în perete. Singurul lucru care rămâne viu, ancorat în realitate, este din nou mâna, cu venele și încheieturile ei, sprijinită pe spătarul scaunului. Aici am inversat procesul obișnuit: am îngropat figura într-un fundal gros de aproape un centimetru, am întins acrilic diluat și l-am șters imediat cu o cârpă — un fel de frottage invers, în care imaginea rămâne doar în adânciturile pastei. Este o pictură despre eliberarea care vine după ce ai avut curajul să faci liniște." },
+    title:"ALBASTRU III — Absența", title_en:"ALBASTRU III — Absence",
+    subtitle:"„The Imprint of Absence”", subtitle_en:"“The Imprint of Absence”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic, pastă structurală și pigment auriu pe MDF", medium_en:"Acrylic, structural paste, and gold pigment on MDF",
+    size:"100 × 70 cm", price:"La cerere",
+    desc:"Un scaun vechi, o haină aruncată peste el, o pereche de pantofi dedesubt — obiecte banale, pe care le-am pictat ca și cum ar fi relicve. Figura se retrage în fundal, aproape invizibilă, o prezență care se stinge în perete. Singurul lucru care rămâne viu, ancorat în realitate, este din nou mâna, cu venele și încheieturile ei, sprijinită pe spătarul scaunului. Aici am inversat procesul obișnuit: am îngropat figura într-un fundal gros de aproape un centimetru, am întins acrilic diluat și l-am șters imediat cu o cârpă — un fel de frottage invers, în care imaginea rămâne doar în adânciturile pastei. Este o pictură despre eliberarea care vine după ce ai avut curajul să faci liniște.",
+    desc_en:"An old chair, a coat thrown over it, a pair of shoes underneath — ordinary objects that I painted as if they were relics. The figure withdraws into the background, almost invisible, a presence fading into the wall. The only thing that stays alive, anchored in reality, is once again the hand, with its veins and joints, resting on the back of the chair. Here I reversed the usual process: I buried the figure in a background nearly a centimeter thick, spread diluted acrylic over it and wiped it off immediately with a cloth — a kind of reverse frottage, where the image survives only in the paste's grooves. It's a painting about the release that comes after you've had the courage to fall silent." },
   { collection:"ALBASTRU",
     full:"img/work3-full.jpg", thumb:"img/work3-full-thumb.jpg",
     details:["work3-detail","tex-gold-1","tex-foot"],
-    title:"ALBASTRU IV — Coloana", subtitle:"„Fault Line”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic, pastă structurală și pigment auriu în relief pe MDF", size:"70 × 100 cm", price:"La cerere",
-    desc:"Un bărbat văzut din spate, desculț, în pantaloni albi, cu spatele descoperit. De-a lungul șirei spinării urcă o creastă de aur, în relief. Pare o fisură sau o rană care se deschide spre interior — este opusul. El nu se mai ține cu mâinile: se ține cu coloana pe care și-a construit-o singur. Am modelat aurul cu șpaclul, în pastă groasă și densă, construind peste suprafață ca să nască umbră și adâncime. Nu te mai repari ca să fii la fel ca înainte. Te repari ca să fii mai înalt, mai vizibil, mai solid." },
+    title:"ALBASTRU IV — Coloana", title_en:"ALBASTRU IV — The Spine",
+    subtitle:"„Fault Line”", subtitle_en:"“Fault Line”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic, pastă structurală și pigment auriu în relief pe MDF", medium_en:"Acrylic, structural paste, and gold pigment in relief on MDF",
+    size:"70 × 100 cm", price:"La cerere",
+    desc:"Un bărbat văzut din spate, desculț, în pantaloni albi, cu spatele descoperit. De-a lungul șirei spinării urcă o creastă de aur, în relief. Pare o fisură sau o rană care se deschide spre interior — este opusul. El nu se mai ține cu mâinile: se ține cu coloana pe care și-a construit-o singur. Am modelat aurul cu șpaclul, în pastă groasă și densă, construind peste suprafață ca să nască umbră și adâncime. Nu te mai repari ca să fii la fel ca înainte. Te repari ca să fii mai înalt, mai vizibil, mai solid.",
+    desc_en:"A man seen from behind, barefoot, in white trousers, his back bare. Along his spine rises a ridge of gold, in relief. It looks like a crack or a wound opening inward — it's the opposite. He no longer holds himself together with his hands: he holds himself up with the spine he built for himself. I shaped the gold with a palette knife, in thick, dense paste, building up the surface to create shadow and depth. You don't repair yourself to be the same as before. You repair yourself to be taller, more visible, more solid." },
   { collection:"ALBASTRU",
     full:"img/work5-full.jpg", thumb:"img/work5-full-thumb.jpg",
     details:["work5-detail1","work5-detail2"],
-    title:"ALBASTRU V — Firul", subtitle:"„Seria Petrificare”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic impasto pe MDF", size:"70 × 100 cm", price:"La cerere",
-    desc:"Un bărbat stă așezat, cu picioarele strânse sub el, iar corpul i s-a făcut piatră — alb-cenușiu, mat, mineralizat până la umeri. Doar mâinile mai sunt vii: roz, calde, singurele care mai au sânge în ele. Încheieturile îi sunt legate cu un fir de aur, iar același fir urcă, subțire, până în palma ridicată spre lumina care intră din dreapta sus. Privind, nu știi dacă mâna oferă firul sau dacă firul o trage în sus — dacă e ofrandă sau captivitate. Asta e tot ce am vrut să pictez. Aurul aici nu e podoabă și nu vindecă nimic frumos, așa cum se folosește de obicei kintsugi; e ceea ce leagă și ceea ce trage, agentul, nu decorul. Am ținut restul corpului în cenușiu tocmai ca firul să nu aibă unde să se ascundă: într-un tablou plin de culoare ar fi fost un accent, aici e singura decizie. Face parte dintr-o serie despre petrificare — figuri prinse între viu și mineral, surprinse în clipa de dinaintea împietririi, când o parte din ele încă refuză. Aici, partea care refuză sunt mâinile: cât timp firul e cald, transformarea nu e completă." },
+    title:"ALBASTRU V — Firul", title_en:"ALBASTRU V — The Thread",
+    subtitle:"„Seria Petrificare”", subtitle_en:"“The Petrification Series”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic impasto pe MDF", medium_en:"Acrylic impasto on MDF",
+    size:"70 × 100 cm", price:"La cerere",
+    desc:"Un bărbat stă așezat, cu picioarele strânse sub el, iar corpul i s-a făcut piatră — alb-cenușiu, mat, mineralizat până la umeri. Doar mâinile mai sunt vii: roz, calde, singurele care mai au sânge în ele. Încheieturile îi sunt legate cu un fir de aur, iar același fir urcă, subțire, până în palma ridicată spre lumina care intră din dreapta sus. Privind, nu știi dacă mâna oferă firul sau dacă firul o trage în sus — dacă e ofrandă sau captivitate. Asta e tot ce am vrut să pictez. Aurul aici nu e podoabă și nu vindecă nimic frumos, așa cum se folosește de obicei kintsugi; e ceea ce leagă și ceea ce trage, agentul, nu decorul. Am ținut restul corpului în cenușiu tocmai ca firul să nu aibă unde să se ascundă: într-un tablou plin de culoare ar fi fost un accent, aici e singura decizie. Face parte dintr-o serie despre petrificare — figuri prinse între viu și mineral, surprinse în clipa de dinaintea împietririi, când o parte din ele încă refuză. Aici, partea care refuză sunt mâinile: cât timp firul e cald, transformarea nu e completă.",
+    desc_en:"A man sits with his legs drawn beneath him, his body turned to stone — grey-white, matte, mineralized up to the shoulders. Only the hands are still alive: pink, warm, the only parts that still have blood in them. His wrists are bound with a gold thread, and the same thread rises, thin, into the palm lifted toward the light entering from the upper right. Looking at it, you can't tell whether the hand is offering the thread or whether the thread is pulling it upward — whether it's an offering or a captivity. That's all I wanted to paint. The gold here is not ornament, and it doesn't heal anything beautifully, the way kintsugi is usually used; it's what binds and what pulls, the agent, not the decoration. I kept the rest of the body in grey precisely so the thread would have nowhere to hide: in a painting full of color it would have been an accent, here it's the only decision. It belongs to a series about petrification — figures caught between the living and the mineral, captured in the instant before turning to stone, when part of them still resists. Here, the part that resists is the hands: as long as the thread is warm, the transformation isn't complete." },
   { collection:"ALBASTRU",
     full:"img/work6-full.jpg", thumb:"img/work6-full-thumb.jpg",
     details:["work6-detail1","work6-detail2"],
-    title:"ALBASTRU VI — Apnee", subtitle:"„Ultimul strop de energie”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic și impasto pe MDF", size:"100 × 70 cm", price:"La cerere",
-    desc:"O figură plutește într-un vortex de albastru închis, cu glezna încă legată de adânc printr-un lanț ruginit. Tot restul corpului i se arcuiește în sus, spre lumină, iar o dâră subțire de bule urcă înaintea ei — ultimul suflu transformat în rugăciune. Am vrut să pictez acel moment în care te simți ancorat, fără aer, și alegi să-ți folosești ultimul strop de energie ca să arăți încotro vrei să mergi. Am lucrat totul în cuțit, cu impasto puternic, ca apa să capete greutate fizică — straturile groase, aproape sculpturale, o fac să se simtă densă, grea, în timp ce lumina centrală sparge textura. E o pictură pe care trebuie s-o vezi de aproape ca să-i simți adâncimea." },
+    title:"ALBASTRU VI — Apnee", title_en:"ALBASTRU VI — Apnea",
+    subtitle:"„Ultimul strop de energie”", subtitle_en:"“The Last Drop of Energy”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și impasto pe MDF", medium_en:"Acrylic and impasto on MDF",
+    size:"100 × 70 cm", price:"La cerere",
+    desc:"O figură plutește într-un vortex de albastru închis, cu glezna încă legată de adânc printr-un lanț ruginit. Tot restul corpului i se arcuiește în sus, spre lumină, iar o dâră subțire de bule urcă înaintea ei — ultimul suflu transformat în rugăciune. Am vrut să pictez acel moment în care te simți ancorat, fără aer, și alegi să-ți folosești ultimul strop de energie ca să arăți încotro vrei să mergi. Am lucrat totul în cuțit, cu impasto puternic, ca apa să capete greutate fizică — straturile groase, aproape sculpturale, o fac să se simtă densă, grea, în timp ce lumina centrală sparge textura. E o pictură pe care trebuie s-o vezi de aproape ca să-i simți adâncimea.",
+    desc_en:"A figure floats in a vortex of dark blue, one ankle still bound to the depths by a rusted chain. The rest of the body arches upward, toward the light, while a thin trail of bubbles rises ahead of it — the last breath turned into a prayer. I wanted to paint that moment when you feel anchored, out of air, and you choose to spend your last drop of energy showing which way you want to go. I worked everything with the palette knife, in heavy impasto, so the water would gain physical weight — the thick, almost sculptural layers make it feel dense and heavy, while the central light breaks through the texture. It's a painting you have to see up close to feel its depth." },
 
   { collection:"ALBASTRU",
     full:"img/work7-full.jpg", thumb:"img/work7-full-thumb.jpg",
     details:["work7-detail2","work7-detail1"],
-    title:"ALBASTRU VII — Emergența", subtitle:"„Ce se ridică din adânc”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic și impasto pe MDF", size:"— × — cm", price:"La cerere",
-    desc:"De data asta nu m-a interesat scufundarea, ci ce vine după ea. Capul e dat pe spate, în lumina care cade dintr-o parte, iar de la piept până la talpă coboară o singură venă de aur — subțire, continuă, ca o fisură care arată drumul spre exterior a tot ce a stat îngropat înăuntru. Corpul e cenușiu, aproape mineral, dar linia de aur îl străbate întreg, dintr-o singură mișcare, fără să se rupă. Am construit fundalul în straturi adânci de albastru și verde întunecat, ca o apă sau o piatră din care figura se desprinde. Emergența e despre momentul în care rana devine drum — singurul loc pe unde poți ieși e exact pe unde ai fost rupt." },
+    title:"ALBASTRU VII — Emergența", title_en:"ALBASTRU VII — Emergence",
+    subtitle:"„Ce se ridică din adânc”", subtitle_en:"“What Rises from the Deep”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și impasto pe MDF", medium_en:"Acrylic and impasto on MDF",
+    size:"— × — cm", price:"La cerere",
+    desc:"De data asta nu m-a interesat scufundarea, ci ce vine după ea. Capul e dat pe spate, în lumina care cade dintr-o parte, iar de la piept până la talpă coboară o singură venă de aur — subțire, continuă, ca o fisură care arată drumul spre exterior a tot ce a stat îngropat înăuntru. Corpul e cenușiu, aproape mineral, dar linia de aur îl străbate întreg, dintr-o singură mișcare, fără să se rupă. Am construit fundalul în straturi adânci de albastru și verde întunecat, ca o apă sau o piatră din care figura se desprinde. Emergența e despre momentul în care rana devine drum — singurul loc pe unde poți ieși e exact pe unde ai fost rupt.",
+    desc_en:"This time I wasn't interested in sinking, but in what comes after it. The head is tilted back, in light falling from one side, and from chest to sole a single vein of gold runs down — thin, continuous, like a crack showing the way out for everything that lay buried inside. The body is grey, almost mineral, but the gold line runs through it whole, in a single unbroken movement. I built the background in deep layers of blue and dark green, like water or stone from which the figure breaks free. Emergence is about the moment when the wound becomes a way out — the only place you can leave from is exactly where you were broken." },
 
   { collection:"ALBASTRU",
     full:"img/work8-full.jpg", thumb:"img/work8-full-thumb.jpg",
     details:["work8-detail1","work8-detail2","work8-detail3"],
-    title:"ALBASTRU VIII — Pragul", subtitle:"„Nici piatră, nici carne”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic și impasto pe MDF", size:"— × — cm", price:"La cerere",
-    desc:"Aici am împărțit corpul exact pe mijloc: o jumătate s-a făcut piatră, crăpată, aproape sticloasă; cealaltă a rămas carne caldă. Un singur trup prins în pragul dintre ele. Mâinile — una de piatră, una vie — se odihnesc fiecare pe umărul care-i seamănă, ca și cum s-ar ține pe sine din ambele părți deodată, fără să știe pe care s-o creadă mai adevărată. Exact acolo unde se întâlnesc cele două jumătăți, pe șira spinării, am tras un fir subțire de aur, singurul lucru care le ține împreună fără să le amestece. Pragul nu e despre a alege între a rămâne piatră sau a rămâne carne. E despre tot ce se întâmplă cât timp nu alegi niciuna." },
+    title:"ALBASTRU VIII — Pragul", title_en:"ALBASTRU VIII — The Threshold",
+    subtitle:"„Nici piatră, nici carne”", subtitle_en:"“Neither Stone Nor Flesh”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și impasto pe MDF", medium_en:"Acrylic and impasto on MDF",
+    size:"— × — cm", price:"La cerere",
+    desc:"Aici am împărțit corpul exact pe mijloc: o jumătate s-a făcut piatră, crăpată, aproape sticloasă; cealaltă a rămas carne caldă. Un singur trup prins în pragul dintre ele. Mâinile — una de piatră, una vie — se odihnesc fiecare pe umărul care-i seamănă, ca și cum s-ar ține pe sine din ambele părți deodată, fără să știe pe care s-o creadă mai adevărată. Exact acolo unde se întâlnesc cele două jumătăți, pe șira spinării, am tras un fir subțire de aur, singurul lucru care le ține împreună fără să le amestece. Pragul nu e despre a alege între a rămâne piatră sau a rămâne carne. E despre tot ce se întâmplă cât timp nu alegi niciuna.",
+    desc_en:"Here I split the body exactly down the middle: one half turned to stone, cracked, almost glassy; the other stayed warm flesh. A single body caught on the threshold between them. The hands — one of stone, one alive — each rest on the shoulder that matches them, as if holding on to itself from both sides at once, not knowing which one to believe is truer. Exactly where the two halves meet, along the spine, I drew a thin thread of gold, the only thing holding them together without blending them. The Threshold isn't about choosing to stay stone or to stay flesh. It's about everything that happens while you choose neither." },
 ];
 
 const works2 = [
   { collection:"CONCREȚIUNE",
     full:"img/work9-full.jpg", thumb:"img/work9-full-thumb.jpg",
     details:["work9-detail1","work9-detail2","work9-detail3"],
-    title:"CONCREȚIUNE I — Sutura", subtitle:"„Prima lucrare din Concrețiune”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic pe MDF, cu intervenție de basorelief din pastă minerală cu praf de marmură", size:"70 × 100 cm", price:"La cerere",
-    desc:"De data asta n-am mai pictat piatra — am construit-o. Am ridicat pasta minerală cu praf de marmură direct pe suprafață, în relief real, până când umărul și-a căpătat greutatea adevărată a materiei, nu doar aparența ei. Am prins figura din profil, cu privirea coborâtă spre propriul umăr, iar mâna urcă din spate și se strânge peste claviculă — intr-un un gest de auto-liniștire. Chiar lângă degete pornește sutura de aur: nu pe piept, ci pe spate, coborând de la baza gâtului peste umăr și omoplat, mai departe spre braț, ca o a doua coloană care ține trupul laolaltă din exterior. Nu e o venă care traversează carnea, ci o cusătură cu grosime reală, care leagă ceva strâns din mai multe bucăți. Sutura deschide o serie nouă — Concrețiune — în care nu mai urmăresc corpul care se preface în piatră, ci piatra care s-a adunat, strat cu strat, exact în jurul unei răni, până a devenit ea însăși o formă de vindecare." },
+    title:"CONCREȚIUNE I — Sutura", title_en:"CONCREȚIUNE I — The Suture",
+    subtitle:"„Prima lucrare din Concrețiune”", subtitle_en:"“The First Work in Concrețiune”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic pe MDF, cu intervenție de basorelief din pastă minerală cu praf de marmură", medium_en:"Acrylic on MDF, with bas-relief intervention in mineral paste and marble dust",
+    size:"70 × 100 cm", price:"La cerere",
+    desc:"De data asta n-am mai pictat piatra — am construit-o. Am ridicat pasta minerală cu praf de marmură direct pe suprafață, în relief real, până când umărul și-a căpătat greutatea adevărată a materiei, nu doar aparența ei. Am prins figura din profil, cu privirea coborâtă spre propriul umăr, iar mâna urcă din spate și se strânge peste claviculă — intr-un un gest de auto-liniștire. Chiar lângă degete pornește sutura de aur: nu pe piept, ci pe spate, coborând de la baza gâtului peste umăr și omoplat, mai departe spre braț, ca o a doua coloană care ține trupul laolaltă din exterior. Nu e o venă care traversează carnea, ci o cusătură cu grosime reală, care leagă ceva strâns din mai multe bucăți. Sutura deschide o serie nouă — Concrețiune — în care nu mai urmăresc corpul care se preface în piatră, ci piatra care s-a adunat, strat cu strat, exact în jurul unei răni, până a devenit ea însăși o formă de vindecare.",
+    desc_en:"This time I didn't paint the stone — I built it. I raised the mineral paste with marble dust straight onto the surface, in real relief, until the shoulder gained the true weight of matter, not just its appearance. I caught the figure in profile, gaze lowered toward her own shoulder, the hand rising from behind to close over the collarbone — a gesture of self-soothing. Right beside the fingers, the gold suture begins: not on the chest, but on the back, running down from the base of the neck over the shoulder and shoulder blade, further toward the arm, like a second spine holding the body together from the outside. It isn't a vein crossing the flesh, but a stitch with real thickness, binding several pieces tightly together. Sutura opens a new series — Concrețiune — in which I no longer follow the body turning into stone, but the stone that has gathered, layer by layer, exactly around a wound, until it became, itself, a form of healing." },
 
   { collection:"CONCREȚIUNE",
     full:"img/work10-full.jpg", thumb:"img/work10-full-thumb.jpg",
     details:["work10-detail1","work10-detail2"],
-    title:"CONCREȚIUNE II — Restituire", subtitle:"„Ce dai înapoi nu te mai apasă”", year:"2026", status:"Disponibilă",
-    medium:"Acrilic și impasto pe MDF, cu intervenție de basorelief din pastă minerală și foiță de aur", size:"70 × 100 cm", price:"La cerere",
-    desc:"De data asta am pictat gestul opus firului care ține. Femeia stă cu spatele, capul întors peste umăr, privind în jos, iar mâna care atârnă nu mai strânge nimic — lasă să cadă, unul câte unul, fragmente mici de piatră cu vene de aur construite în basorelief. Sus, pe ceafă și de-a lungul șirei spinării, același aur curge ca o crăpătură fină, dar aici nu se mai adună — se desprinde, cade, se împrăștie pe podea, dincolo de corp. Am vrut o pictură despre eliberare: nu poți construi ceva nou cât timp ții strâns fiecare bucată din ce te-a rănit. Restituire e despre mâna care, în sfârșit, se deschide și dă înapoi lumii ce nu-i mai aparține." },
+    title:"CONCREȚIUNE II — Restituire", title_en:"CONCREȚIUNE II — Restitution",
+    subtitle:"„Ce dai înapoi nu te mai apasă”", subtitle_en:"“What You Give Back No Longer Weighs on You”", year:"2026", status:"Disponibilă",
+    medium:"Acrilic și impasto pe MDF, cu intervenție de basorelief din pastă minerală și foiță de aur", medium_en:"Acrylic and impasto on MDF, with bas-relief intervention in mineral paste and gold leaf",
+    size:"70 × 100 cm", price:"La cerere",
+    desc:"De data asta am pictat gestul opus firului care ține. Femeia stă cu spatele, capul întors peste umăr, privind în jos, iar mâna care atârnă nu mai strânge nimic — lasă să cadă, unul câte unul, fragmente mici de piatră cu vene de aur construite în basorelief. Sus, pe ceafă și de-a lungul șirei spinării, același aur curge ca o crăpătură fină, dar aici nu se mai adună — se desprinde, cade, se împrăștie pe podea, dincolo de corp. Am vrut o pictură despre eliberare: nu poți construi ceva nou cât timp ții strâns fiecare bucată din ce te-a rănit. Restituire e despre mâna care, în sfârșit, se deschide și dă înapoi lumii ce nu-i mai aparține.",
+    desc_en:"This time I painted the opposite gesture to the thread that holds. The woman stands with her back to us, head turned over her shoulder, looking down, and the hand hanging at her side no longer grips anything — it lets fall, one by one, small fragments of stone with veins of gold built in bas-relief. Above, at the nape of the neck and along the spine, the same gold flows like a fine crack, but here it no longer gathers — it breaks away, falls, scatters across the floor, beyond the body. I wanted a painting about release: you can't build something new while you're still holding tightly to every piece of what hurt you. Restituire is about the hand that, finally, opens and gives back to the world what no longer belongs to it." },
 ];
 works.push(...works2);
+
+/* ====== I18N ====== */
+let lang = (function(){ try{ return localStorage.getItem('spLang') || 'ro'; }catch(e){ return 'ro'; } })();
+const STATUS_EN = { "Disponibilă":"Available" };
+const PRICE_EN = { "La cerere":"On request" };
+const TITLE_RO = "Ștefan Popescu — Pictură contemporană";
+const TITLE_EN = "Ștefan Popescu — Contemporary Painting";
+const DESC_RO = "Ștefan Popescu — pictor autodidact. Colecțiile ALBASTRU și CONCREȚIUNE: lucrări figurative în tehnică mixtă, despre fragilitate, tensiune și urmele timpului.";
+const DESC_EN = "Ștefan Popescu — self-taught painter. The ALBASTRU and CONCREȚIUNE collections: figurative mixed-media works about fragility, tension, and the marks of time.";
+const OGDESC_RO = "Pictură despre fragilitate, tensiune și felul în care omul încearcă să rămână întreg atunci când viața îl fisurează.";
+const OGDESC_EN = "Paintings about fragility, tension, and the way a person tries to stay whole when life cracks them open.";
+
+function tr(w,field){ const v = w[field+'_en']; return lang==='en' && v ? v : w[field]; }
+function statusText(w){ return lang==='en' ? (STATUS_EN[w.status]||w.status) : w.status; }
+function priceText(w){ return lang==='en' ? (PRICE_EN[w.price]||w.price) : w.price; }
+
+function setMeta(sel, content){ const el=document.querySelector(sel); if(el) el.setAttribute('content', content); }
+
+function applyStaticI18n(){
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    if(el.dataset.ro===undefined) el.dataset.ro = el.innerHTML;
+    el.innerHTML = lang==='en' ? el.dataset.en : el.dataset.ro;
+  });
+  document.querySelectorAll('[data-en-placeholder]').forEach(el=>{
+    if(el.dataset.roPlaceholder===undefined) el.dataset.roPlaceholder = el.getAttribute('placeholder')||'';
+    el.setAttribute('placeholder', lang==='en' ? el.dataset.enPlaceholder : el.dataset.roPlaceholder);
+  });
+  document.querySelectorAll('[data-en-alt]').forEach(el=>{
+    if(el.dataset.roAlt===undefined) el.dataset.roAlt = el.getAttribute('alt')||'';
+    el.setAttribute('alt', lang==='en' ? el.dataset.enAlt : el.dataset.roAlt);
+  });
+  document.querySelectorAll('[data-en-aria-label]').forEach(el=>{
+    if(el.dataset.roAriaLabel===undefined) el.dataset.roAriaLabel = el.getAttribute('aria-label')||'';
+    el.setAttribute('aria-label', lang==='en' ? el.dataset.enAriaLabel : el.dataset.roAriaLabel);
+  });
+  document.documentElement.lang = lang;
+  document.title = lang==='en' ? TITLE_EN : TITLE_RO;
+  setMeta('meta[name="description"]', lang==='en' ? DESC_EN : DESC_RO);
+  setMeta('meta[property="og:title"]', lang==='en' ? TITLE_EN : TITLE_RO);
+  setMeta('meta[property="og:description"]', lang==='en' ? OGDESC_EN : OGDESC_RO);
+  setMeta('meta[property="og:image:alt"]', lang==='en' ? TITLE_EN : TITLE_RO);
+  setMeta('meta[property="og:locale"]', lang==='en' ? 'en_US' : 'ro_RO');
+  setMeta('meta[name="twitter:title"]', lang==='en' ? TITLE_EN : TITLE_RO);
+  setMeta('meta[name="twitter:description"]', lang==='en' ? OGDESC_EN : OGDESC_RO);
+  document.querySelectorAll('.lang-btn').forEach(b=> b.classList.toggle('active', b.dataset.lang===lang));
+}
 
 /* build galleries grouped by collection */
 const gridAlbastru = document.getElementById('galleryAlbastru');
 const gridConcretiune = document.getElementById('galleryConcretiune');
-works.forEach((w,i)=>{
-  const el=document.createElement('div');
-  el.className='work';
-  el.onclick=()=>openLb(i);
-  el.innerHTML=`
-    <span class="badge">${w.status}</span>
-    <div class="work-img"><img src="${w.thumb}" alt="${w.title}" loading="lazy"></div>
-    <div class="work-cap">
-      <div><h3>${w.title}</h3><div class="meta">${w.medium}</div></div>
-      <span class="plus">Detaliu +</span>
-    </div>`;
-  (w.collection==="CONCREȚIUNE" ? gridConcretiune : gridAlbastru).appendChild(el);
-});
+function renderGalleries(){
+  gridAlbastru.innerHTML=''; gridConcretiune.innerHTML='';
+  const detailLabel = lang==='en' ? 'Detail +' : 'Detaliu +';
+  works.forEach((w,i)=>{
+    const el=document.createElement('div');
+    el.className='work';
+    el.onclick=()=>openLb(i);
+    el.innerHTML=`
+      <span class="badge">${statusText(w)}</span>
+      <div class="work-img"><img src="${w.thumb}" alt="${tr(w,'title')}" loading="lazy"></div>
+      <div class="work-cap">
+        <div><h3>${tr(w,'title')}</h3><div class="meta">${tr(w,'medium')}</div></div>
+        <span class="plus">${detailLabel}</span>
+      </div>`;
+    (w.collection==="CONCREȚIUNE" ? gridConcretiune : gridAlbastru).appendChild(el);
+  });
+}
 
 /* lightbox */
 let cur=0;
 function openLb(i){
   cur=i; const w=works[i];
-  document.getElementById('lbColl').textContent="Colecția "+w.collection;
-  document.getElementById('lbTitle').textContent=w.title;
-  document.getElementById('lbYear').textContent=[w.subtitle,w.year].filter(Boolean).join(" · ");
-  document.getElementById('lbDesc').textContent=w.desc;
-  document.getElementById('lbMedium').textContent=w.medium;
+  document.getElementById('lbColl').textContent=(lang==='en'?'Collection ':'Colecția ')+w.collection;
+  document.getElementById('lbTitle').textContent=tr(w,'title');
+  document.getElementById('lbYear').textContent=[tr(w,'subtitle'),w.year].filter(Boolean).join(" · ");
+  document.getElementById('lbDesc').textContent=tr(w,'desc');
+  document.getElementById('lbMedium').textContent=tr(w,'medium');
   document.getElementById('lbSize').textContent=w.size;
-  document.getElementById('lbStatus').textContent=w.status;
-  document.getElementById('lbPrice').textContent=w.price;
-  const views=[{src:w.full,thumb:w.thumb,label:"Lucrarea completă"}]
-    .concat((w.details||[]).map(d=>({src:`img/${d}.jpg`,thumb:`img/${d}-thumb.jpg`,label:"Detaliu"})));
+  document.getElementById('lbStatus').textContent=statusText(w);
+  document.getElementById('lbPrice').textContent=priceText(w);
+  const fullLabel = lang==='en' ? 'Full piece' : 'Lucrarea completă';
+  const detailLabel = lang==='en' ? 'Detail' : 'Detaliu';
+  const views=[{src:w.full,thumb:w.thumb,label:fullLabel}]
+    .concat((w.details||[]).map(d=>({src:`img/${d}.jpg`,thumb:`img/${d}-thumb.jpg`,label:detailLabel})));
   const strip=document.getElementById('lbThumbs'); strip.innerHTML="";
   views.forEach((v,idx)=>{
     const im=document.createElement('img');
@@ -464,6 +565,16 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft')stepLb(-1);
 });
 
+/* language switch */
+function setLang(l){
+  lang = l;
+  try{ localStorage.setItem('spLang', l); }catch(e){}
+  applyStaticI18n();
+  renderGalleries();
+  if(document.getElementById('lb').classList.contains('open')) openLb(cur);
+}
+document.querySelectorAll('.lang-btn').forEach(b=> b.onclick = ()=> setLang(b.dataset.lang));
+
 /* nav */
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>60));
@@ -481,6 +592,10 @@ function sendMail(e){
   window.location.href=`mailto:${to}?subject=${sub}&body=${body}`;
   return false;
 }
+
+/* init */
+applyStaticI18n();
+renderGalleries();
 </script>
 </body>
 </html>
